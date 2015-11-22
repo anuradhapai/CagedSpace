@@ -40,9 +40,13 @@ int currentStreamId=0;
     
     _avPlayers = [[NSMutableDictionary alloc] initWithCapacity:20];
     self.streamsByBeacons = @{
-                             @"57673:45085": @"http://listen.radionomy.com/blacklabelfm",
-                             @"44642:44519": @"http://cms.stream.publicradio.org/cms.mp3",
-                             @"16079:18304": @"http://streaming.radionomy.com/ABC-Piano"
+//                             @"57673:45085": @"http://listen.radionomy.com/blacklabelfm",
+//                             @"44642:44519": @"http://cms.stream.publicradio.org/cms.mp3",
+//                             @"16079:18304": @"http://streaming.radionomy.com/ABC-Piano"
+//                             
+                             @"3667:41637": @"http://listen.radionomy.com/blacklabelfm",
+                             @"3787:10809": @"http://cms.stream.publicradio.org/cms.mp3",
+                             @"43499:60906": @"http://streaming.radionomy.com/ABC-Piano"
                              //                             @"20256:28960": [NSNumber numberWithInt:0],
                              //                             @"35131:24072": [NSNumber numberWithInt:2],
                              //                             @"34567:20852":[NSNumber numberWithInt:1]
@@ -50,6 +54,7 @@ int currentStreamId=0;
     
     for(NSString *beacon in [self.streamsByBeacons allKeys]){
         AVPlayer *avPlayer = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:_streamsByBeacons[beacon]]];
+        [avPlayer pause];
         _avPlayers[beacon] = avPlayer;
     }
         
@@ -172,6 +177,9 @@ int currentStreamId=0;
             previousStream = [_beaconProximityCounter allKeys][0];
         }
         
+        NSString *nearestBeaconKey = [NSString stringWithFormat:@"%@:%@",
+                                      nearestBeacon.major, nearestBeacon.minor];
+        
         if (stream != nil) {
             if (previousStream == nil) {
                 //first time
@@ -185,23 +193,25 @@ int currentStreamId=0;
                 int value = [count intValue];
                 if (value >= MINIMUM_NUMBER_OF_TIMES_SAME_BEACON) {
                     
-                    NSString *nearestBeaconKey = [NSString stringWithFormat:@"%@:%@",
-                                           nearestBeacon.major, nearestBeacon.minor];
                     if (self.currentPlayer == nil) {
                         self.currentPlayer = _avPlayers[nearestBeaconKey];
                         [self.currentPlayer play];
                     }
                     //do your action
                     if (self.currentPlayer != _avPlayers[nearestBeaconKey]) {
+                        float prevVolume = self.currentPlayer.volume;
                         [self doVolumeFadeOutOnAVPlayer:self.currentPlayer];
-                        NSLog(@"-- after fade out --");
-                        [self.currentPlayer pause];
-                        NSLog(@"-- after pause--");
+//                        NSLog(@"-- after fade out --");
+                        //[self.currentPlayer pause];
+//                        NSLog(@"-- after pause--");
                         self.currentPlayer = _avPlayers[nearestBeaconKey];
-                        [self doVolumeFadeInOnAVPlayer:self.currentPlayer];
-                        NSLog(@"-- after fade in --");
+                        self.currentPlayer.volume = 0.1;
+//                        NSLog(@"previous volume %f-----",prevVolume);
                         [self.currentPlayer play];
-                        NSLog(@"-- after play fade in--");
+                        [self doVolumeFadeInOnAVPlayer:self.currentPlayer];
+//                        NSLog(@"-- after fade in --");
+                        //[self.currentPlayer play];
+//                        NSLog(@"-- after play fade in--");
                     }
                     
                     NSLog(@"----------------At Stream %@-------------------",stream);
@@ -219,7 +229,8 @@ int currentStreamId=0;
             }
             
         }else{
-            NSLog(@"----------------Someone elses beacon nearby--------------------");
+            
+            NSLog(@"----------------Someone elses beacon nearby---------%@-----------",nearestBeaconKey);
         }
 
    }
@@ -231,10 +242,13 @@ int currentStreamId=0;
     NSLog(@"---- called doVolumeFadeOutOnAVPlayer ----");
     if ([avPlayer respondsToSelector:@selector(setVolume:)]) {
         if (avPlayer.volume > 0.1) {
-            avPlayer.volume = avPlayer.volume - 0.1;
+            avPlayer.volume = avPlayer.volume - 0.05;
            //[self performSelector:@selector(doVolumeFadeOutOnAVPlayer:) withObject:avPlayer afterDelay:0.5];
-            [NSThread sleepForTimeInterval:0.5];
+            [NSThread sleepForTimeInterval:0.25];
             [self performSelectorOnMainThread:@selector(doVolumeFadeOutOnAVPlayer:) withObject:avPlayer waitUntilDone:YES];
+        }else{
+            NSLog(@"--------fade out completely done -----------");
+            [avPlayer pause];
         }
     }else {
         NSLog(@"---- Does not respond to set volume ----");
@@ -242,17 +256,43 @@ int currentStreamId=0;
    
 }
 
+-(void) doFadeInFadeOutOfPlayers:(NSArray *) avPlayers{
+    AVPlayer *fadeOutPlayer = avPlayers[0];
+    AVPlayer *fadeInPLayer = avPlayers[1];
+
+    if ([fadeOutPlayer respondsToSelector:@selector(setVolume:)] && [fadeInPLayer respondsToSelector:@selector(setVolume:)]) {
+        if (fadeOutPlayer.volume > 0.1) {
+            fadeOutPlayer.volume = fadeOutPlayer.volume - 0.05;
+            fadeInPLayer.volume = fadeInPLayer.volume + 0.05;
+            //[self performSelector:@selector(doVolumeFadeOutOnAVPlayer:) withObject:avPlayer afterDelay:0.5];
+            [NSThread sleepForTimeInterval:0.25];
+            [self performSelectorOnMainThread:@selector(doVolumeFadeOutOnAVPlayer:) withObject:@[fadeInPLayer,fadeOutPlayer] waitUntilDone:YES];
+        }else{
+            NSLog(@"--------fade out completely done -----------");
+            [fadeOutPlayer pause];
+        }
+    }else {
+        NSLog(@"---- Does not respond to set volume ----");
+    }
+    
+}
+
 -(void) doVolumeFadeInOnAVPlayer: (AVPlayer *) avPlayer
 {
     NSLog(@"---- called doVolumeFadeInOnAVPlayer ----");
     
     if ([avPlayer respondsToSelector:@selector(setVolume:)]) {
+//        if (avPlayer.volume == 0.0) {
+//            [avPlayer play];
+//        }
         if (avPlayer.volume < 1.0) {
-            avPlayer.volume = avPlayer.volume + 0.1;
+            avPlayer.volume = avPlayer.volume + 0.05;
             //[self performSelector:@selector(doVolumeFadeInOnAVPlayer:) withObject:avPlayer afterDelay:0.5];
             
-            [NSThread sleepForTimeInterval:0.5];
+            [NSThread sleepForTimeInterval:0.25];
             [self performSelectorOnMainThread:@selector(doVolumeFadeInOnAVPlayer:) withObject:avPlayer waitUntilDone:YES];
+        }else{
+            NSLog(@"-------- fade In completely done --------");
         }
     }
 }

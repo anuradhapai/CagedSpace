@@ -10,9 +10,4 @@
 #import "AudioPlayer.h"
 
 @interface StreamsPlayerVC :UIViewController
-@property (nonatomic, strong) AVPlayer *audioPlayer1;
-@property (nonatomic, strong) AVPlayer *audioPlayer2;
-- (IBAction)stream1:(id)sender;
-- (IBAction)stream2:(id)sender;
-- (IBAction)stream3:(id)sender;
 @end
