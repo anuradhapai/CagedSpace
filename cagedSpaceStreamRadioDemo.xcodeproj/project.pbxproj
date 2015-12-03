@@ -18,6 +18,7 @@
 		9B0E6CFE1BDEEAE600AB1412 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0E6CFA1BDEEAE600AB1412 /* AVKit.framework */; };
 		9B7527071BE6EACF00D000EF /* MediaPlayerData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7527061BE6EACF00D000EF /* MediaPlayerData.m */; };
 		9BB55B421BE1CA9300ABF510 /* StreamsPlayerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB55B411BE1CA9300ABF510 /* StreamsPlayerVC.m */; };
+		9BF3D69C1C10D7DB007A159E /* NSURL+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF3D69B1C10D7DB007A159E /* NSURL+Additions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		9B7527061BE6EACF00D000EF /* MediaPlayerData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaPlayerData.m; sourceTree = "<group>"; };
 		9BB55B401BE1CA9300ABF510 /* StreamsPlayerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamsPlayerVC.h; sourceTree = "<group>"; };
 		9BB55B411BE1CA9300ABF510 /* StreamsPlayerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamsPlayerVC.m; sourceTree = "<group>"; };
+		9BF3D69A1C10D7DB007A159E /* NSURL+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Additions.h"; sourceTree = "<group>"; };
+		9BF3D69B1C10D7DB007A159E /* NSURL+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Additions.m"; sourceTree = "<group>"; };
 		ADBB6F3B5F231A33B40540B4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CA1F958C2C15E316BF35C378 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -97,6 +100,8 @@
 		9B093B3F1BDDCD4F004C3E89 /* cagedSpaceStreamRadioDemo */ = {
 			isa = PBXGroup;
 			children = (
+				9BF3D69A1C10D7DB007A159E /* NSURL+Additions.h */,
+				9BF3D69B1C10D7DB007A159E /* NSURL+Additions.m */,
 				9B093B431BDDCD4F004C3E89 /* AppDelegate.h */,
 				9B093B441BDDCD4F004C3E89 /* AppDelegate.m */,
 				9BB55B401BE1CA9300ABF510 /* StreamsPlayerVC.h */,
@@ -243,6 +248,7 @@
 			files = (
 				9B093B451BDDCD4F004C3E89 /* AppDelegate.m in Sources */,
 				9B7527071BE6EACF00D000EF /* MediaPlayerData.m in Sources */,
+				9BF3D69C1C10D7DB007A159E /* NSURL+Additions.m in Sources */,
 				9BB55B421BE1CA9300ABF510 /* StreamsPlayerVC.m in Sources */,
 				9B093B421BDDCD4F004C3E89 /* main.m in Sources */,
 			);
