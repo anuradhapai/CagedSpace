@@ -11,9 +11,8 @@
 #import <EstimoteSDK/EstimoteSDK.h>
 #import "NSURL+Additions.h"
 
-NSString* const nsStream0 = @"http://listen.radionomy.com/blacklabelfm";
-NSString* const nsStream1 = @"http://cms.stream.publicradio.org/cms.mp3";
-NSString* const nsStream2 = @"http://streaming.radionomy.com/ABC-Piano";
+NSString* const amazonURLString = @"http://52.26.164.148:8080/CagedSpaceWS/rest/grids";
+
 static void *CurrentPlayerStatusObservationContext = &CurrentPlayerStatusObservationContext;
 static void *NextPlayerStatusObservationContext = &NextPlayerStatusObservationContext;
 
@@ -22,7 +21,7 @@ static void *NextPlayerStatusObservationContext = &NextPlayerStatusObservationCo
 @property(strong,nonatomic)NSMutableDictionary* mediaPlayers;
 @property(strong,nonatomic)NSMutableArray* streams;
 @property(strong,nonatomic)NSMutableDictionary* streamsDict;
-@property (nonatomic) NSDictionary *streamsByBeacons;
+@property (nonatomic) NSMutableDictionary *streamsByBeacons;
 @property (nonatomic) ESTBeaconManager *beaconManager;
 @property (nonatomic) CLBeaconRegion *beaconRegion;
 @property (nonatomic) NSMutableDictionary *beaconProximityCounter;
@@ -44,20 +43,23 @@ int currentStreamId=0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _avPlayers = [[NSMutableDictionary alloc] initWithCapacity:20];
-    self.streamsByBeacons = @{
-                              //                             @"57673:45085": @"http://listen.radionomy.com/blacklabelfm",
-                              //                             @"44642:44519": @"http://cms.stream.publicradio.org/cms.mp3",
-                              //                             @"16079:18304": @"http://streaming.radionomy.com/ABC-Piano"
-                              //
-                              @"3667:41637": @"http://listen.radionomy.com/blacklabelfm",
-                              @"3787:10809": @"http://cms.stream.publicradio.org/cms.mp3",
-                              @"43499:60906": @"http://streaming.radionomy.com/ABC-Piano"
-                              //                             @"20256:28960": [NSNumber numberWithInt:0],
-                              //                             @"35131:24072": [NSNumber numberWithInt:2],
-                              //                             @"34567:20852":[NSNumber numberWithInt:1]
-                              };
+    NSURL *amazonURL = [NSURL URLWithString:amazonURLString];
+    [self fetchStreamsByBeaconsFromURL:amazonURL];
     
+    _avPlayers = [[NSMutableDictionary alloc] initWithCapacity:20];
+//    self.streamsByBeacons = @{
+//                              //                             @"57673:45085": @"http://listen.radionomy.com/blacklabelfm",
+//                              //                             @"44642:44519": @"http://cms.stream.publicradio.org/cms.mp3",
+//                              //                             @"16079:18304": @"http://streaming.radionomy.com/ABC-Piano"
+//                              //
+//                              @"3667:41637": @"http://listen.radionomy.com/blacklabelfm",
+//                              @"3787:10809": @"http://cms.stream.publicradio.org/cms.mp3",
+//                              @"43499:60906": @"http://streaming.radionomy.com/ABC-Piano"
+//                              //                             @"20256:28960": [NSNumber numberWithInt:0],
+//                              //                             @"35131:24072": [NSNumber numberWithInt:2],
+//                              //                             @"34567:20852":[NSNumber numberWithInt:1]
+//                              };
+//    
     
     self.beaconManager = [ESTBeaconManager new];
     self.beaconManager.delegate = self;
@@ -164,8 +166,8 @@ int currentStreamId=0;
 }
 
 -(void) doFadeInFadeOutOfPlayers:(NSArray *) avPlayers{
-    AVPlayer *fadeOutPlayer = avPlayers[0];
-    AVPlayer *fadeInPLayer = avPlayers[1];
+    AVPlayer *fadeOutPlayer = self.currentPlayer;
+    AVPlayer *fadeInPLayer = self.nextPlayer;
     
     if ([fadeOutPlayer respondsToSelector:@selector(setVolume:)] && [fadeInPLayer respondsToSelector:@selector(setVolume:)]) {
         if (fadeOutPlayer.volume > 0.1) {
@@ -240,6 +242,34 @@ int currentStreamId=0;
             
         }
     }
+}
+
+
+- (void) fetchStreamsByBeaconsFromURL: (NSURL *) url
+{
+    self.streamsByBeacons = [[NSMutableDictionary alloc] initWithCapacity:6];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL * localFile, NSURLResponse * response, NSError * error) {
+        
+        NSData *data = [[NSData alloc] initWithContentsOfURL:localFile];
+        
+        NSMutableArray *resultJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
+     
+        //NSLog(@"---printing JSON --- %@", resultJSON);
+        
+        for (NSDictionary *gridDetails in resultJSON) {
+            NSString *streamURL =  gridDetails[@"streamURL"];
+            NSString *beaconID = gridDetails[@"beaconId"];
+            [self.streamsByBeacons setObject:streamURL forKey:beaconID];
+        }
+        NSLog(@"---streamsByBeacons---- %@",self.streamsByBeacons);
+    }];
+    
+    [task resume];
+
 }
 
 @end
