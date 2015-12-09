@@ -13,6 +13,8 @@
 
 NSString* const amazonURLString = @"http://52.26.164.148:8080/CagedSpaceWS/rest/grids";
 
+//NSString* const amazonURLString = @"http://10.38.88.21:8081/CagedSpaceWS/rest/grids";
+
 static void *CurrentPlayerStatusObservationContext = &CurrentPlayerStatusObservationContext;
 static void *NextPlayerStatusObservationContext = &NextPlayerStatusObservationContext;
 
@@ -208,7 +210,7 @@ int currentStreamId=0;
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
+ //   [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
 }
 - (NSString *)streamForBeacon:(CLBeacon *)beacon {
     NSString *beaconKey = [NSString stringWithFormat:@"%@:%@",
