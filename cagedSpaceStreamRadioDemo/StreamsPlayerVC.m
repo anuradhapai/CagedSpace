@@ -65,12 +65,15 @@ int currentStreamId=0;
     
     self.beaconManager = [ESTBeaconManager new];
     self.beaconManager.delegate = self;
-    [self.beaconManager requestAlwaysAuthorization];
+    [self.beaconManager requestWhenInUseAuthorization];
     
     
     _beaconProximityCounter = [NSMutableDictionary new];
     
-    self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID: [[NSUUID alloc]initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"] identifier:@"ICE BEACON"];
+//    self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID: [[NSUUID alloc]initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"] identifier:@"ICE BEACON"];
+
+    self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID: [[NSUUID alloc]initWithUUIDString:@"7455EF5F-50AE-5EC6-ACD9-6EE22A52A0AA"] identifier:@"ICE BEACON"];
+
 }
 
 - (void)didReceiveMemoryWarning {

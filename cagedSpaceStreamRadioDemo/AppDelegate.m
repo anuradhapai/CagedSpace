@@ -7,10 +7,16 @@
 //
 
 #import "AppDelegate.h"
+#import <EstimoteSDK/EstimoteSDK.h>
+
 
 @interface AppDelegate ()
 
+// 2. Add a property to hold the beacon manager
+@property (nonatomic) ESTBeaconManager *beaconManager;
+
 @end
+
 
 @implementation AppDelegate
 
@@ -20,6 +26,25 @@
     
     [UIApplication sharedApplication].idleTimerDisabled = YES;
     
+    // Estimote Analytics
+    [ESTConfig setupAppID:@"uncc---college-of-arts---a-gl5" andAppToken:@"f424cd457af77e24e8ee67322e38a1d6"];
+    
+    // 4. Enable analytics
+    [ESTConfig enableRangingAnalytics:YES];
+    [ESTConfig enableMonitoringAnalytics:YES];
+    
+//    // 5. Instantiate the beacon manager
+//    self.beaconManager = [ESTBeaconManager new];
+//    
+//    [self.beaconManager requestWhenInUseAuthorization];
+//
+//    
+//    // 6. Start scanning for beacons
+//    [self.beaconManager startRangingBeaconsInRegion:
+//     [[CLBeaconRegion alloc] initWithProximityUUID:@"7455EF5F-50AE-5EC6-ACD9-6EE22A52A0AA"
+//                                        identifier:@"my beacons"]];
+//
+//
     return YES;
 }
 
