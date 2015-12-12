@@ -34,15 +34,17 @@
     UIViewController *centerViewController;
     switch (indexPath.row) {
         case 0:
-            centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"FIRST_TOP_VIEW_CONTROLLER"];
+            centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"HOME_VIEW_CONTROLLER"];
             break;
         case 1:
-            centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SECOND_TOP_VIEW_CONTROLLER"];
+            centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ABOUT_VIEW_CONTROLLER"];
             break;
         case 2:
-            centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"THIRD_TOP_VIEW_CONTROLLER"];
+            centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ORCHESTRA_VIEW_CONTROLLER"];
             break;
-
+        case 3:
+            centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"FLOORMAP_VIEW_CONTROLLER"];
+            break;
         default:
             break;
     }

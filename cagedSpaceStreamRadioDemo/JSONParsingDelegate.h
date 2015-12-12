@@ -13,4 +13,8 @@
 -(void) didFinishFetchingStreamsAndBeacons;
 @optional
 -(void) didFinishFetchingOrchestraDetails: (NSMutableArray *) musicians;
+
+//@optional
+//-(void) didFinishFetchingFloorMap: (NSData *) floorMapImageData;
+
 @end

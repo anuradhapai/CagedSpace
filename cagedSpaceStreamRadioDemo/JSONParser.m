@@ -11,6 +11,9 @@
 
 
 NSString* const orchestraDetailsURLString = @"http://52.26.164.148:8080/CagedSpaceWS/rest/grids/orchestra";
+//NSString* const floorMapURLString = @"http://52.26.164.148:8080/CagedSpaceWS/rest/grids/floorMap";
+
+
 @interface JSONParser ()
 @end
 
@@ -45,11 +48,30 @@ NSString* const orchestraDetailsURLString = @"http://52.26.164.148:8080/CagedSpa
                                                             [self.parsingDelegate didFinishFetchingOrchestraDetails:self.musiciansArray];
                                                             
                                                         });
-
+                                                        
                                                     }];
-
-
+    
+    
     [task resume];
 }
 
+//- (void) fetchFloorMap {
+//    
+//    NSURL *url = [NSURL URLWithString:floorMapURLString];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
+//        
+//        NSLog(@"---%@ data ---- ", data);
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.parsingDelegate didFinishFetchingFloorMap:imageURL];
+//            
+//        });
+//
+//    }];
+//    [dataTask resume];
+//    
+//}
 @end

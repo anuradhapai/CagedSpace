@@ -17,4 +17,6 @@
 @property (weak) id<JSONParsingDelegate> parsingDelegate;
 
 -(void) fetchOrchestraDetails;
+//- (void) fetchFloorMap;
+
 @end

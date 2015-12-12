@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Streams PlayerVC-->
+        <!--Home-->
         <scene sceneID="NaY-LY-qg6">
             <objects>
                 <viewController id="Re0-Mh-d3O" customClass="StreamsPlayerVC" sceneMemberID="viewController">
@@ -96,7 +96,7 @@
                             <constraint firstAttribute="leadingMargin" secondItem="ASA-L0-4HW" secondAttribute="leading" id="xxO-M6-w9p"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="xhC-bS-71w"/>
+                    <navigationItem key="navigationItem" title="Home" id="xhC-bS-71w"/>
                     <connections>
                         <outlet property="streamNo" destination="AC8-hy-WPb" id="Fd2-tJ-t4v"/>
                     </connections>
@@ -170,7 +170,7 @@
         <scene sceneID="uZl-hO-5pw">
             <objects>
                 <tableViewController storyboardIdentifier="SIDE_DRAWER_CONTROLLER" id="0Bd-tT-Ibf" customClass="SideDrawerController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="cKV-jj-qae">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="cKV-jj-qae">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
@@ -182,7 +182,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="XzV-SY-j2U">
-                            <rect key="frame" x="0.0" y="152" width="600" height="44"/>
+                            <rect key="frame" x="0.0" y="196" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -197,7 +197,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="First View" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SL3-SW-SZq">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Home" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SL3-SW-SZq">
                                                     <rect key="frame" x="15" y="0.0" width="570" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <animations/>
@@ -217,7 +217,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Second View" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NKz-Um-Fcu">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="About" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NKz-Um-Fcu">
                                                     <rect key="frame" x="15" y="0.0" width="570" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <animations/>
@@ -237,7 +237,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Third View" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fei-3M-6kG">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Orchestra" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fei-3M-6kG">
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="ftr-gn-2J7" style="IBUITableViewCellStyleDefault" id="Tmo-B6-Qj9">
+                                        <rect key="frame" x="0.0" y="152" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tmo-B6-Qj9" id="bd0-HM-s1G">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Floor Map" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ftr-gn-2J7">
                                                     <rect key="frame" x="15" y="0.0" width="570" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <animations/>
@@ -266,7 +286,7 @@
         <!--Navigation Controller-->
         <scene sceneID="iA5-pN-T9D">
             <objects>
-                <navigationController storyboardIdentifier="FIRST_TOP_VIEW_CONTROLLER" automaticallyAdjustsScrollViewInsets="NO" id="b6S-Wd-55F" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HOME_VIEW_CONTROLLER" automaticallyAdjustsScrollViewInsets="NO" id="b6S-Wd-55F" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CMV-t2-XQ9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -285,7 +305,7 @@
         <!--Navigation Controller-->
         <scene sceneID="u3Y-u6-Zw9">
             <objects>
-                <navigationController storyboardIdentifier="SECOND_TOP_VIEW_CONTROLLER" definesPresentationContext="YES" id="Pnz-CO-tLu" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ABOUT_VIEW_CONTROLLER" definesPresentationContext="YES" id="Pnz-CO-tLu" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HXR-ez-mjG">
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
@@ -321,7 +341,7 @@
         <!--Navigation Controller-->
         <scene sceneID="QCF-g6-M0o">
             <objects>
-                <navigationController storyboardIdentifier="FOURTH_TOP_VIEW_CONTROLLER" definesPresentationContext="YES" id="zWC-3f-TcW" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FLOORMAP_VIEW_CONTROLLER" definesPresentationContext="YES" id="zWC-3f-TcW" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aBL-ev-fDf">
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
@@ -334,10 +354,10 @@
             </objects>
             <point key="canvasLocation" x="2911" y="3779"/>
         </scene>
-        <!--Second View Controller-->
+        <!--Floor Map-->
         <scene sceneID="FdH-JG-gig">
             <objects>
-                <viewController id="UrD-V2-K0H" customClass="PGSecondViewController" sceneMemberID="viewController">
+                <viewController title="Floor Map" id="UrD-V2-K0H" customClass="FloorMapVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HKX-sM-B4p"/>
                         <viewControllerLayoutGuide type="bottom" id="fJL-S2-gof"/>
@@ -345,16 +365,31 @@
                     <view key="view" contentMode="scaleToFill" id="rny-Gg-wxK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R9Y-np-C91">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <animations/>
+                            </imageView>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="R9Y-np-C91" firstAttribute="leading" secondItem="rny-Gg-wxK" secondAttribute="leadingMargin" constant="-20" id="0o7-aE-AEA"/>
+                            <constraint firstItem="R9Y-np-C91" firstAttribute="top" secondItem="HKX-sM-B4p" secondAttribute="bottom" id="35q-DT-idQ"/>
+                            <constraint firstItem="fJL-S2-gof" firstAttribute="top" secondItem="R9Y-np-C91" secondAttribute="bottom" id="Hvd-e2-i13"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="R9Y-np-C91" secondAttribute="trailing" constant="-20" id="nV4-pO-IfZ"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Second View Controller" id="1Hw-zl-8w2"/>
+                    <navigationItem key="navigationItem" title="Floor Map" id="1Hw-zl-8w2"/>
+                    <connections>
+                        <outlet property="floorMapImageView" destination="R9Y-np-C91" id="hLM-9H-jZ4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bwl-tq-hci" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3653" y="3787"/>
         </scene>
-        <!--Orchestra View Controller-->
+        <!--Orchestra-->
         <scene sceneID="Rf8-Qw-AO6">
             <objects>
                 <tableViewController id="xHp-Ox-tFB" customClass="OrchestraViewController" sceneMemberID="viewController">
@@ -426,7 +461,7 @@
                             <outlet property="delegate" destination="xHp-Ox-tFB" id="S4k-LM-cad"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="XVn-ef-zEV"/>
+                    <navigationItem key="navigationItem" title="Orchestra" id="XVn-ef-zEV"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xYf-85-sKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -435,7 +470,7 @@
         <!--Navigation Controller-->
         <scene sceneID="LYm-nG-0IK">
             <objects>
-                <navigationController storyboardIdentifier="THIRD_TOP_VIEW_CONTROLLER" automaticallyAdjustsScrollViewInsets="NO" id="OCE-Ap-v5V" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ORCHESTRA_VIEW_CONTROLLER" automaticallyAdjustsScrollViewInsets="NO" id="OCE-Ap-v5V" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Las-Js-79z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
