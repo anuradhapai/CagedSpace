@@ -39,6 +39,10 @@
         case 1:
             centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SECOND_TOP_VIEW_CONTROLLER"];
             break;
+        case 2:
+            centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"THIRD_TOP_VIEW_CONTROLLER"];
+            break;
+
         default:
             break;
     }

@@ -13,6 +13,7 @@
 		9B093B4B1BDDCD4F004C3E89 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B093B491BDDCD4F004C3E89 /* Main.storyboard */; };
 		9B093B4D1BDDCD4F004C3E89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B093B4C1BDDCD4F004C3E89 /* Assets.xcassets */; };
 		9B093B501BDDCD4F004C3E89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B093B4E1BDDCD4F004C3E89 /* LaunchScreen.storyboard */; };
+		9B0BF44E1C1BCE8B006879FF /* Musician.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0BF44D1C1BCE8B006879FF /* Musician.m */; };
 		9B0E6CFB1BDEEAE600AB1412 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0E6CF71BDEEAE600AB1412 /* AudioToolbox.framework */; };
 		9B0E6CFD1BDEEAE600AB1412 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0E6CF91BDEEAE600AB1412 /* AVFoundation.framework */; };
 		9B0E6CFE1BDEEAE600AB1412 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0E6CFA1BDEEAE600AB1412 /* AVKit.framework */; };
@@ -21,6 +22,9 @@
 		9B76E9141C1B84A4009439EB /* SideDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B76E9131C1B84A4009439EB /* SideDrawerController.m */; };
 		9B76E9171C1B8663009439EB /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B76E9161C1B8663009439EB /* AboutViewController.m */; };
 		9BB18B8B1C1BB17900813DD4 /* StreamsPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB18B8A1C1BB17900813DD4 /* StreamsPlayer.m */; };
+		9BB18B951C1BC3B600813DD4 /* OrchestraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB18B941C1BC3B600813DD4 /* OrchestraViewController.m */; };
+		9BB18B981C1BC3EA00813DD4 /* FloorMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB18B971C1BC3EA00813DD4 /* FloorMapVC.m */; };
+		9BB18B9B1C1BC61100813DD4 /* JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB18B9A1C1BC61100813DD4 /* JSONParser.m */; };
 		9BB55B421BE1CA9300ABF510 /* StreamsPlayerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB55B411BE1CA9300ABF510 /* StreamsPlayerVC.m */; };
 		9BF3D69C1C10D7DB007A159E /* NSURL+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF3D69B1C10D7DB007A159E /* NSURL+Additions.m */; };
 /* End PBXBuildFile section */
@@ -35,6 +39,8 @@
 		9B093B4C1BDDCD4F004C3E89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B093B4F1BDDCD4F004C3E89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B093B511BDDCD4F004C3E89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B0BF44C1C1BCE8B006879FF /* Musician.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Musician.h; sourceTree = "<group>"; };
+		9B0BF44D1C1BCE8B006879FF /* Musician.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Musician.m; sourceTree = "<group>"; };
 		9B0E6CF71BDEEAE600AB1412 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9B0E6CF91BDEEAE600AB1412 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9B0E6CFA1BDEEAE600AB1412 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
@@ -49,6 +55,13 @@
 		9BB18B891C1BB17900813DD4 /* StreamsPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamsPlayer.h; sourceTree = "<group>"; };
 		9BB18B8A1C1BB17900813DD4 /* StreamsPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamsPlayer.m; sourceTree = "<group>"; };
 		9BB18B8C1C1BB6EE00813DD4 /* StreamPlayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamPlayerDelegate.h; sourceTree = "<group>"; };
+		9BB18B931C1BC3B600813DD4 /* OrchestraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrchestraViewController.h; sourceTree = "<group>"; };
+		9BB18B941C1BC3B600813DD4 /* OrchestraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrchestraViewController.m; sourceTree = "<group>"; };
+		9BB18B961C1BC3EA00813DD4 /* FloorMapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloorMapVC.h; sourceTree = "<group>"; };
+		9BB18B971C1BC3EA00813DD4 /* FloorMapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FloorMapVC.m; sourceTree = "<group>"; };
+		9BB18B991C1BC61100813DD4 /* JSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONParser.h; sourceTree = "<group>"; };
+		9BB18B9A1C1BC61100813DD4 /* JSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONParser.m; sourceTree = "<group>"; };
+		9BB18B9C1C1BC62800813DD4 /* JSONParsingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONParsingDelegate.h; sourceTree = "<group>"; };
 		9BB55B401BE1CA9300ABF510 /* StreamsPlayerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamsPlayerVC.h; sourceTree = "<group>"; };
 		9BB55B411BE1CA9300ABF510 /* StreamsPlayerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamsPlayerVC.m; sourceTree = "<group>"; };
 		9BF3D69A1C10D7DB007A159E /* NSURL+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Additions.h"; sourceTree = "<group>"; };
@@ -118,6 +131,8 @@
 				9B76E90E1C1B8361009439EB /* Navigation Controllers */,
 				9B093B431BDDCD4F004C3E89 /* AppDelegate.h */,
 				9B093B441BDDCD4F004C3E89 /* AppDelegate.m */,
+				9BB18B891C1BB17900813DD4 /* StreamsPlayer.h */,
+				9BB18B8A1C1BB17900813DD4 /* StreamsPlayer.m */,
 				9BB55B401BE1CA9300ABF510 /* StreamsPlayerVC.h */,
 				9BB55B411BE1CA9300ABF510 /* StreamsPlayerVC.m */,
 				9B093B491BDDCD4F004C3E89 /* Main.storyboard */,
@@ -148,8 +163,10 @@
 				9B76E9131C1B84A4009439EB /* SideDrawerController.m */,
 				9B76E9151C1B8663009439EB /* AboutViewController.h */,
 				9B76E9161C1B8663009439EB /* AboutViewController.m */,
-				9BB18B891C1BB17900813DD4 /* StreamsPlayer.h */,
-				9BB18B8A1C1BB17900813DD4 /* StreamsPlayer.m */,
+				9BB18B931C1BC3B600813DD4 /* OrchestraViewController.h */,
+				9BB18B941C1BC3B600813DD4 /* OrchestraViewController.m */,
+				9BB18B961C1BC3EA00813DD4 /* FloorMapVC.h */,
+				9BB18B971C1BC3EA00813DD4 /* FloorMapVC.m */,
 			);
 			name = "Navigation Controllers";
 			sourceTree = "<group>";
@@ -157,8 +174,13 @@
 		9BB18B841C1B8C8700813DD4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				9BB18B991C1BC61100813DD4 /* JSONParser.h */,
+				9BB18B9A1C1BC61100813DD4 /* JSONParser.m */,
+				9BB18B9C1C1BC62800813DD4 /* JSONParsingDelegate.h */,
 				9BF3D69A1C10D7DB007A159E /* NSURL+Additions.h */,
 				9BF3D69B1C10D7DB007A159E /* NSURL+Additions.m */,
+				9B0BF44C1C1BCE8B006879FF /* Musician.h */,
+				9B0BF44D1C1BCE8B006879FF /* Musician.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -286,9 +308,13 @@
 			files = (
 				9B093B451BDDCD4F004C3E89 /* AppDelegate.m in Sources */,
 				9B7527071BE6EACF00D000EF /* MediaPlayerData.m in Sources */,
+				9B0BF44E1C1BCE8B006879FF /* Musician.m in Sources */,
+				9BB18B9B1C1BC61100813DD4 /* JSONParser.m in Sources */,
 				9B76E9171C1B8663009439EB /* AboutViewController.m in Sources */,
+				9BB18B981C1BC3EA00813DD4 /* FloorMapVC.m in Sources */,
 				9BB18B8B1C1BB17900813DD4 /* StreamsPlayer.m in Sources */,
 				9BF3D69C1C10D7DB007A159E /* NSURL+Additions.m in Sources */,
+				9BB18B951C1BC3B600813DD4 /* OrchestraViewController.m in Sources */,
 				9BB55B421BE1CA9300ABF510 /* StreamsPlayerVC.m in Sources */,
 				9B76E9141C1B84A4009439EB /* SideDrawerController.m in Sources */,
 				9B093B421BDDCD4F004C3E89 /* main.m in Sources */,
