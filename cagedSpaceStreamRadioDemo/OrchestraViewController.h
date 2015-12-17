@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OrchestraViewController : UITableViewController
+@interface OrchestraViewController : UITableViewController<UITableViewDataSource>
 
 @end

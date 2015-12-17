@@ -22,6 +22,7 @@
 @property (nonatomic, strong) SDImageCache *imageCache;
 @property (strong, nonatomic) Musician *currentMusician;
 
+@property (strong, nonatomic) IBOutlet UITableView *OrcTableView;
 @end
 
 @implementation OrchestraViewController
@@ -32,9 +33,14 @@
 
         _imageCache = [[SDImageCache alloc] initWithNamespace:@"edu.uncc.mobidev.groupa.cagedSpaceStreamRadioDemo"];
     
+    
         JSONParser *parser = [[JSONParser alloc] init];
         parser.parsingDelegate = self;
         [parser fetchOrchestraDetails];
+    self.OrcTableView.dataSource = self;
+    self.OrcTableView.rowHeight = UITableViewAutomaticDimension;
+    self.OrcTableView.estimatedRowHeight = 200;
+    
 }
 
 -(void) didFinishFetchingOrchestraDetails:(NSMutableArray *)musicians{
@@ -57,6 +63,7 @@
 
     UITableViewCell *cell;
     cell = [self.tableView dequeueReusableCellWithIdentifier:@"MusicianDetails" forIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryNone;
     _currentMusician = self.musicians[indexPath.row];
     
     _currentCellImageView = (UIImageView *) [cell.contentView viewWithTag:1];

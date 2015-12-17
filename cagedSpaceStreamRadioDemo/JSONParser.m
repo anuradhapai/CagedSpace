@@ -10,6 +10,7 @@
 #import "Musician.h"
 
 
+//NSString* const orchestraDetailsURLString = @"http://10.38.11.156:8081/CagedSpaceWS/rest/grids/orchestra";
 NSString* const orchestraDetailsURLString = @"http://52.26.164.148:8080/CagedSpaceWS/rest/grids/orchestra";
 //NSString* const floorMapURLString = @"http://52.26.164.148:8080/CagedSpaceWS/rest/grids/floorMap";
 

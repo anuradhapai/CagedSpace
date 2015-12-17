@@ -12,4 +12,6 @@
 @optional
 - (void) streamDidChange:(NSURL*)streamURL;
 - (void) didEnterRegion:(NSString*)regionName;
+-(void) updateGridImage:(NSString*)gridImageUrl;
+- (void) showAlertWithErrorMessage: (NSString *) errorMessage;
 @end

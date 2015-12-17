@@ -14,7 +14,7 @@
 #import "JSONParsingDelegate.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-NSString* const floorMapURLString = @"http://52.26.164.148:8080/CagedSpaceWS/images/floorMap.jpg";
+NSString* const floorMapURLString = @"http://10.38.11.156:8081/CagedSpaceWS/images/floorMap.jpg";
 
 @interface FloorMapVC () <JSONParsingDelegate>
 

@@ -8,12 +8,14 @@
 
 #import "AppDelegate.h"
 #import <EstimoteSDK/EstimoteSDK.h>
+#import <Parse/Parse.h>
 
 
 @interface AppDelegate ()
 
 // 2. Add a property to hold the beacon manager
 @property (nonatomic) ESTBeaconManager *beaconManager;
+
 
 @end
 
@@ -32,6 +34,10 @@
     // 4. Enable analytics
     [ESTConfig enableRangingAnalytics:YES];
     [ESTConfig enableMonitoringAnalytics:YES];
+    
+    [Parse setApplicationId:@"FkOrKacTGHOegnsonl7DeF6oBzRJzZWdjw0xafmv"
+                  clientKey:@"e6pzZ3UQFskVDyFkEw07sSCmd1Jgvdc427PDIpF6"];
+    
     
 //    // 5. Instantiate the beacon manager
 //    self.beaconManager = [ESTBeaconManager new];

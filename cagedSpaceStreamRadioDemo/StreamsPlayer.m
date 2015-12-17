@@ -14,10 +14,11 @@
 #import <MMDrawerController/MMDrawerController.h>
 #import "MMDrawerBarButtonItem.h"
 #import "UIViewController+MMDrawerController.h"
+#import "Parse/Parse.h"
 
 NSString* const amazonURLString = @"http://52.26.164.148:8080/CagedSpaceWS/rest/grids";
 
-//NSString* const amazonURLString = @"http://10.38.88.21:8081/CagedSpaceWS/rest/grids";
+//NSString* const amazonURLString = @"http://10.38.11.156:8081/CagedSpaceWS/rest/grids";
 
 static void *CurrentPlayerStatusObservationContext = &CurrentPlayerStatusObservationContext;
 static void *NextPlayerStatusObservationContext = &NextPlayerStatusObservationContext;
@@ -28,6 +29,8 @@ static void *NextPlayerStatusObservationContext = &NextPlayerStatusObservationCo
 @property(strong,nonatomic)NSMutableArray* streams;
 @property(strong,nonatomic)NSMutableDictionary* streamsDict;
 @property (nonatomic) NSMutableDictionary *streamsByBeacons;
+@property (nonatomic) NSMutableDictionary *BeaconIdsByGridIds;
+@property (nonatomic) NSMutableDictionary *BeaconIdsByGridImages;
 @property (nonatomic) ESTBeaconManager *beaconManager;
 @property (nonatomic) CLBeaconRegion *beaconRegion;
 @property (nonatomic) NSMutableDictionary *beaconProximityCounter;
@@ -35,7 +38,7 @@ static void *NextPlayerStatusObservationContext = &NextPlayerStatusObservationCo
 @property (strong, nonatomic) AVPlayer* currentPlayer;
 @property (strong, nonatomic) NSURL* prevStreamURL;
 @property (strong, nonatomic) AVPlayer* nextPlayer;
-
+@property (nonatomic) NSString* userId;
 
 
 @end
@@ -91,7 +94,29 @@ int currentStreamId=0;
         self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID: [[NSUUID alloc]initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"] identifier:@"ICE BEACON"];
     
 //    self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID: [[NSUUID alloc]initWithUUIDString:@"7455EF5F-50AE-5EC6-ACD9-6EE22A52A0AA"] identifier:@"ICE BEACON"];
-    
+    if([PFUser currentUser]==nil){
+        [PFAnonymousUtils logInWithBlock:^(PFUser *user, NSError *error) {
+            if (error) {
+                NSLog(@"Anonymous login failed.");
+            } else {
+                self.userId =[NSString stringWithFormat:@"%@",user.objectId ];
+                NSLog(@"****%@",self.userId);
+                NSLog(@"Anonymous user logged in.");
+            }
+        }];
+        
+        
+        
+        
+    }
+    else{
+        PFUser* user=[PFUser currentUser];
+        self.userId =[NSString stringWithFormat:@"%@",user.objectId ];
+        NSLog(@"****%@",self.userId);
+
+        
+    }
+   
 }
 
 - (void)beaconManager:(id)manager didRangeBeacons:(NSArray *)beacons
@@ -134,6 +159,17 @@ int currentStreamId=0;
                             [self.currentPlayer addObserver:self forKeyPath:@"status" options:0 context:CurrentPlayerStatusObservationContext];
                             [self.currentPlayer play];
                         }];
+                        [_delegate updateGridImage:self.BeaconIdsByGridImages[nearestBeaconKey]];
+                        //Parse logic
+                        PFQuery *query = [PFUser query];
+                              NSLog(@"***ppppp*%@",query);
+                        // Retrieve the object by id
+                        [query getObjectInBackgroundWithId:self.userId
+                                                     block:^(PFObject *userObject, NSError *error) {
+                                                         NSLog(@"***ppppp*%@",userObject);
+                                                         userObject[@"currentGrid"] = self.BeaconIdsByGridIds[nearestBeaconKey];
+                                                         [userObject saveInBackground];
+                                                     }];
                         self.prevStreamURL = streamURL;
                     }else if(![self.prevStreamURL isEquivalent:streamURL]){
                         self.nextPlayer = [AVPlayer playerWithURL:streamURL];
@@ -141,6 +177,20 @@ int currentStreamId=0;
                         [self.nextPlayer addObserver:self forKeyPath:@"status" options:0 context:NextPlayerStatusObservationContext];
                         
                         self.prevStreamURL = streamURL;
+                        
+                        [_delegate updateGridImage:self.BeaconIdsByGridImages[nearestBeaconKey]];
+                        //Parse logic
+                        PFQuery *query = [PFQuery queryWithClassName:@"User"];
+                        
+                        // Retrieve the object by id
+                        [query getObjectInBackgroundWithId:self.userId
+                                                     block:^(PFObject *userObject, NSError *error) {
+                                                         
+                                                         userObject[@"currentGrid"] = self.BeaconIdsByGridIds[nearestBeaconKey];
+                                                         [userObject saveInBackground];
+                                                     }];
+
+                        
                     }
                     
                     NSLog(@"----------------At Stream %@-------------------",stream);
@@ -164,9 +214,10 @@ int currentStreamId=0;
     }
 }
 
+
 -(void) doVolumeFadeOutOnAVPlayer:(AVPlayer *) avPlayer
 {
-    NSLog(@"---- called doVolumeFadeOutOnAVPlayer ----");
+    //NSLog(@"---- called doVolumeFadeOutOnAVPlayer ----");
     if ([avPlayer respondsToSelector:@selector(setVolume:)]) {
         if (avPlayer.volume > 0.2) {
             avPlayer.volume = avPlayer.volume - 0.05;
@@ -204,7 +255,7 @@ int currentStreamId=0;
 
 -(void) doVolumeFadeInOnAVPlayer: (AVPlayer *) avPlayer
 {
-    NSLog(@"---- called doVolumeFadeInOnAVPlayer ----");
+    //NSLog(@"---- called doVolumeFadeInOnAVPlayer ----");
     
     if ([avPlayer respondsToSelector:@selector(setVolume:)]) {
         if (avPlayer.volume < 1.0) {
@@ -256,28 +307,48 @@ int currentStreamId=0;
 - (void) fetchStreamsByBeaconsFromURL: (NSURL *) url
 {
     self.streamsByBeacons = [[NSMutableDictionary alloc] initWithCapacity:6];
+    self.BeaconIdsByGridIds = [[NSMutableDictionary alloc] initWithCapacity:6];
+    self.BeaconIdsByGridImages = [[NSMutableDictionary alloc] initWithCapacity:6];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
     NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL * localFile, NSURLResponse * response, NSError * error) {
-        
-        NSData *data = [[NSData alloc] initWithContentsOfURL:localFile];
-        
-        NSMutableArray *resultJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
-        
-        //NSLog(@"---printing JSON --- %@", resultJSON);
-        
-        for (NSDictionary *gridDetails in resultJSON) {
-            NSString *streamURL =  gridDetails[@"streamURL"];
-            NSString *beaconID = gridDetails[@"beaconId"];
-            [self.streamsByBeacons setObject:streamURL forKey:beaconID];
+        if (!error) {
+            NSData *data = [[NSData alloc] initWithContentsOfURL:localFile];
+            
+            if (data) {
+                NSMutableArray *resultJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
+                
+                //NSLog(@"---printing JSON --- %@", resultJSON);
+                
+                for (NSDictionary *gridDetails in resultJSON) {
+                    NSString *streamURL =  gridDetails[@"streamURL"];
+                    NSString *beaconID = gridDetails[@"beaconId"];
+                    NSString *gridId = gridDetails[@"id"];
+                    NSString *gridImage = gridDetails[@"gridImageURL"];
+                    [self.streamsByBeacons setObject:streamURL forKey:beaconID];
+                    [self.BeaconIdsByGridIds setObject:gridId forKey:beaconID];
+                    [self.BeaconIdsByGridImages setObject:gridImage forKey:beaconID];
+                }
+                //NSLog(@"---streamsByBeacons---- %@",self.streamsByBeacons);
+                //NSLog(@"---streamsByBeacons---- %@",self.BeaconIdsByGridImages);
+                
+                //start ranging as soon as fetched
+                [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
+
+            } else {
+                //alert no data.. turn on internet
+                NSLog(@"---fetchStreamsByBeaconsFromURL--- no data--- ");
+
+            }
+        } else {
+            NSLog(@"---fetchStreamsByBeaconsFromURL--- error--- %@", error.localizedDescription);
+            NSString *errorMessage = [error.localizedDescription stringByAppendingString:@" Please turn on your Wi-Fi"];
+            [_delegate showAlertWithErrorMessage:errorMessage];
         }
-        NSLog(@"---streamsByBeacons---- %@",self.streamsByBeacons);
         
-        //start ranging as soon as fetched
-        [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
-    }];
+            }];
     
     [task resume];
     
